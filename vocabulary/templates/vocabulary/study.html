@@ -1,0 +1,16 @@
+{% extends 'vocabulary/base.html' %}
+
+{% block content %}
+    {{ message }}<br>
+
+    <h1>{{ english_word_for_guess.english_word }} is:</h1><br>
+
+    <form action="{% url 'vocabulary:test' english_word_for_guess.id %}" method="post">
+        {% csrf_token %}
+        {% for item in variants %}
+            <input type="radio" name="test_info" id="test{{ forloop.counter }}" value="{{ item }}">
+            <label for="test{{ forloop.counter }}"> {{ item }}</label><br>
+        {% endfor %}
+        <input type="submit" value="Submit">
+    </form>
+{% endblock content %}

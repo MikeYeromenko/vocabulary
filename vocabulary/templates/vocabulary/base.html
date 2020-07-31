@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vocabulary</title>
+</head>
+<body>
+    {% block study %}
+        <form action="{% url 'vocabulary:study' %}" method="get">
+            <input type="submit" value="Start studying">
+        </form>
+    {% endblock study %}
+    {% block add_word %}
+        <form action="{% url 'vocabulary:add_word' %}" method="post">
+            {% csrf_token %}
+            <label for="add_e">English: </label>
+            <input type="text" name="english" id="add_e">
+            <label for="add_r">Russian: </label>
+            <input type="text" name="russian" id="add_r">
+            <input type="submit" value="Save"><br>
+        </form>
+        <br>
+    {% endblock add_word %}
+    {% block messages %}
+        {% if messages %}
+            {% for message in messages %}
+                <h2{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+                    {{ message }} <br>
+                </h2>
+            {% endfor %}
+        {% endif %}
+    {% endblock messages %}
+    {% block content %}
+    {% endblock content %}
+</body>
+</html>

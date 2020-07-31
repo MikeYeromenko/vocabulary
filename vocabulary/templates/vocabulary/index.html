@@ -1,0 +1,19 @@
+{% extends 'vocabulary/base.html' %}
+
+{% block content %}
+    <table style="text-align: center">
+        <tr>
+            <td>Number</td><td>English</td><td>Russian</td><td>Added</td>
+        </tr>
+
+            {% for word in words_list %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ word.english_word }}</td>
+                    <td>{{ word.russian_word }}</td>
+                    <td>{{ word.added_date }}</td>
+                </tr>
+            {% endfor %}
+
+    </table>
+{% endblock content %}
